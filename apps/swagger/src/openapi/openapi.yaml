@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: JihyunLab Microservice Api Gateway
+  description: |-
+    JihyunLab Microservice Api Gateway
+  contact:
+    email: jihyunlab@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token generated from sign in'
+  schemas:
+    $ref: './user.yaml#/components/schemas'
+paths:
+  $ref: './user.yaml#/paths'
