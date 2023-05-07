@@ -1,0 +1,54 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug AppGateway",
+      "runtimeExecutable": "nest",
+      "runtimeArgs": ["start", "--debug=9001", "--watch", "appgateway"],
+      "sourceMaps": true,
+      "env": {
+        "NODE_ENV": "dev"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Auth",
+      "runtimeExecutable": "nest",
+      "runtimeArgs": ["start", "--debug=9002", "--watch", "auth"],
+      "sourceMaps": true,
+      "env": {
+        "NODE_ENV": "dev"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug User",
+      "runtimeExecutable": "nest",
+      "runtimeArgs": ["start", "--debug=9003", "--watch", "user"],
+      "sourceMaps": true,
+      "env": {
+        "NODE_ENV": "dev"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Swagger",
+      "runtimeExecutable": "npm",
+      "preLaunchTask": "npm: swagger:pre",
+      "runtimeArgs": ["run", "swagger"],
+      "sourceMaps": true,
+      "env": {
+        "NODE_ENV": "dev"
+      },
+      "console": "integratedTerminal"
+    }
+  ]
+}

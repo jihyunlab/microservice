@@ -1,0 +1,92 @@
+paths:
+  /user/create:
+    post:
+      tags:
+        - User
+      summary: Create user
+      description: Processing user created requests
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateReq'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreateRes'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /user/delete:
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      description: Processing user deleted requests
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeleteReq'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDeleteRes'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    UserCreateReq:
+      type: object
+      properties:
+        email:
+          type: string
+          example: jihyunlab@gmail.com
+        password:
+          type: string
+          example: 1q2w3e4r
+        name:
+          type: string
+          example: Jihyun
+        role:
+          type: array
+          items:
+            type: string
+          example: ['Admin']
+    UserCreateRes:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        message:
+          type: string
+          example: User created
+    UserDeleteReq:
+      type: object
+      properties:
+        email:
+          type: string
+          example: jihyunlab@gmail.com
+    UserDeleteRes:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        message:
+          type: string
+          example: User will be deleted

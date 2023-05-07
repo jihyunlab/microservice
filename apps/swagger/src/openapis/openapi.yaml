@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: JihyunLab Microservice Api Gateway
+  description: |-
+    JihyunLab Microservice Api Gateway
+  contact:
+    email: jihyunlab@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:3001
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token generated from sign in'
+  schemas:
+    AuthSigninReq:
+      $ref: './auth.yaml#/components/schemas/AuthSigninReq'
+    AuthSigninRes:
+      $ref: './auth.yaml#/components/schemas/AuthSigninRes'
+    AuthValidateRes:
+      $ref: './auth.yaml#/components/schemas/AuthValidateRes'
+    UserCreateReq:
+      $ref: './user.yaml#/components/schemas/UserCreateReq'
+    UserCreateRes:
+      $ref: './user.yaml#/components/schemas/UserCreateRes'
+    UserDeleteReq:
+      $ref: './user.yaml#/components/schemas/UserDeleteReq'
+    UserDeleteRes:
+      $ref: './user.yaml#/components/schemas/UserDeleteRes'
+paths:
+  /auth/signin:
+    $ref: './auth.yaml#/paths/~1auth~1signin'
+  /auth/validate:
+    $ref: './auth.yaml#/paths/~1auth~1validate'
+  /user/create:
+    $ref: './user.yaml#/paths/~1user~1create'
+  /user/delete:
+    $ref: './user.yaml#/paths/~1user~1delete'

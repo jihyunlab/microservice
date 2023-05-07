@@ -1,0 +1,74 @@
+paths:
+  /auth/signin:
+    post:
+      tags:
+        - Auth
+      summary: Sign in
+      description: Processing user sign in requests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSigninReq'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSigninRes'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /auth/validate:
+    get:
+      tags:
+        - Auth
+      summary: JWT Authentication validation
+      description: Processing authentication validation requests
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthValidateRes'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    AuthSigninReq:
+      type: object
+      properties:
+        email:
+          type: string
+          example: jihyunlab@gmail.com
+        password:
+          type: string
+          example: 1q2w3e4r
+    AuthSigninRes:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        message:
+          type: string
+          example: Sign in was successful
+        access_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImppaHl1bmxhYkBnbWFpbC5jb20iLCJuYW1lIjoiSmloeXVuIiwicm9sZSI6WyJBZG1pbiJdLCJpYXQiOjE2ODMxMjE1NDIsImV4cCI6MTY4MzIwNzk0Mn0.KnlPkUTzjeZbrhPQ-R0LU2BKtvfHFid8O-nJAWWfpI4
+    AuthValidateRes:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 0
+        message:
+          type: string
+          example: Authentication validation was successful
