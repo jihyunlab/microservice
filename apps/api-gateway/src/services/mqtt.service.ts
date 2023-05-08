@@ -6,6 +6,15 @@ import { timeout as rxjsTimeout } from 'rxjs';
 export class MqttService {
   constructor(@Inject('MQTT') private readonly client: ClientProxy) {}
 
+  async transmit(outgoing: string, method: string, req: any, preresponse: any, timeout?: number) {
+    if (method === 'MESSAGE') {
+      return this.send(outgoing, req, timeout);
+    } else if (method === 'EVENT') {
+      this.emit(outgoing, req);
+      return preresponse;
+    }
+  }
+
   async send(outgoing: string, req: any, timeout?: number) {
     try {
       const observable = this.client

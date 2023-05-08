@@ -59,7 +59,13 @@ export class ApiGatewayService {
           );
           break;
         case 'MQTT':
-          receive = await this.mqttService.send(api.outgoing, req);
+          receive = await this.mqttService.transmit(
+            api['outgoing'],
+            api['method'],
+            req,
+            api['preresponse'],
+            Number(process.env.MICROSERVICE_REQUEST_TIMEOUT)
+          );
           break;
       }
 
