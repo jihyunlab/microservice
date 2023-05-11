@@ -15,6 +15,7 @@
     "swagger": "tsc-watch -p apps/swagger/tsconfig.app.json --outDir dist/apps/swagger --onSuccess \"node dist/apps/swagger/main\""
   },
   "dependencies": {
+    "@nestjs/bull": "^0.6.3",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
@@ -25,6 +26,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
     "bcrypt": "^5.1.0",
+    "bull": "^4.10.4",
     "ioredis": "^5.3.2",
     "mongoose": "^7.0.5",
     "mqtt": "^4.3.7",

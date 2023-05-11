@@ -1,12 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 import { Model } from 'mongoose';
-import { User, UserDocument } from '../schemas/user.schema';
 import * as bcrypt from 'bcrypt';
+import { User, UserDocument } from '../schemas/user.schema';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
+    @InjectQueue('USER_QUEUE') private userQueue: Queue
+  ) {}
 
   async create(email: string, password: string, name: string, role: string[]) {
     try {
@@ -34,8 +39,11 @@ export class UserService {
 
   async delete(email: string) {
     try {
-      const result = await this.userModel.deleteOne({ email: email });
-      return result.deletedCount;
+      const job = await this.userQueue.add('delete', {
+        email: email,
+      });
+
+      return job;
     } catch (error) {
       console.log(error);
       return -1;
