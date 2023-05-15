@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package grpc;
+
+service GrpcService {
+  rpc grpc (GrpcRequest) returns (GrpcResponse) {}
+}
+
+message GrpcRequest {
+}
+
+message GrpcResponse {
+  optional int32 code = 1;
+  string message = 2;
+}

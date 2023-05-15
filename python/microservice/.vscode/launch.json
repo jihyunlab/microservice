@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug(HTTP, MQTT)",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "cwd": "${workspaceRoot}/src",
+      "args": ["main:app", "--reload"]
+    },
+    {
+      "name": "Debug(gRPC)",
+      "type": "python",
+      "request": "launch",
+      "program": "src/main.py"
+    }
+  ]
+}
