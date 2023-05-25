@@ -9,7 +9,7 @@ export class ClientService {
   async message() {
     try {
       let response;
-      const observable = this.client.send({ cmd: '/redis/message' }, {}).pipe(take(1)).pipe(timeout(3000));
+      const observable = this.client.send('/redis/message', {}).pipe(take(1)).pipe(timeout(3000));
 
       await observable.forEach((res) => {
         response = res;
@@ -23,7 +23,7 @@ export class ClientService {
 
   async event() {
     try {
-      this.client.emit({ cmd: '/redis/event' }, {});
+      this.client.emit('/redis/event', {});
     } catch (error) {
       console.log(error);
     }

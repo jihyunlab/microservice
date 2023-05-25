@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import { Ctx, EventPattern, MessagePattern, Payload, RedisContext } from '@nestjs/microservices';
 import { from } from 'rxjs';
 import { ServerService } from './server.service';
 
@@ -7,13 +7,14 @@ import { ServerService } from './server.service';
 export class ServerController {
   constructor(private readonly serverService: ServerService) {}
 
-  @MessagePattern({ cmd: '/redis/message' })
-  async message() {
+  @MessagePattern('/redis/message')
+  async message(@Payload() payload, @Ctx() context: RedisContext) {
+    console.log(JSON.stringify(payload), context.getChannel());
     await this.serverService.message();
     return from([{ code: 0, message: 'success' }]);
   }
 
-  @EventPattern({ cmd: '/redis/event' })
+  @EventPattern('/redis/event')
   async event() {
     await this.serverService.event();
   }

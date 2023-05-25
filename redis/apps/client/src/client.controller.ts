@@ -3,8 +3,8 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ClientService } from './client.service';
 
-@Controller('/redis')
 @ApiTags('Redis')
+@Controller('/redis')
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
