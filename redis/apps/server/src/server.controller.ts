@@ -16,6 +16,6 @@ export class ServerController {
 
   @EventPattern('/redis/event')
   async event() {
-    await this.serverService.event();
+    this.serverService.event();
   }
 }
