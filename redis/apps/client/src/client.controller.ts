@@ -19,6 +19,6 @@ export class ClientController {
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
   async event(@Res() res: Response) {
     this.clientService.event();
-    res.status(HttpStatus.OK).send();
+    res.status(HttpStatus.ACCEPTED).send();
   }
 }
