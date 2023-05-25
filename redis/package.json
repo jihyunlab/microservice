@@ -20,8 +20,6 @@
     "test:e2e": "jest --config ./apps/server/test/jest-e2e.json"
   },
   "dependencies": {
-    "@jihyunlab/eslint-config": "^1.0.6",
-    "@jihyunlab/prettier-config": "^1.0.3",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/microservices": "^9.4.2",
@@ -39,6 +37,8 @@
     "@types/jest": "29.5.1",
     "@types/node": "18.16.12",
     "@types/supertest": "^2.0.11",
+    "@jihyunlab/eslint-config": "^1.0.6",
+    "@jihyunlab/prettier-config": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
