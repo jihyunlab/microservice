@@ -11,7 +11,7 @@ export class ClientController {
   @Get('/message')
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
   async message(@Res() res: Response) {
-    await this.clientService.message();
+    this.clientService.message();
     res.status(HttpStatus.ACCEPTED).send();
   }
 
