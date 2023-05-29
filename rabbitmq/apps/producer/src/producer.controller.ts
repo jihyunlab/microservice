@@ -9,16 +9,17 @@ export class ProducerController {
   constructor(private readonly producerService: ProducerService) {}
 
   @Get('/message')
-  @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
-  async message(@Res() res: Response) {
-    this.producerService.message();
-    res.status(HttpStatus.ACCEPTED).send();
+  @ApiResponse({ status: HttpStatus.OK, description: 'OK' })
+  async message(@Res({ passthrough: true }) res: Response) {
+    const response = this.producerService.message();
+    res.status(HttpStatus.ACCEPTED);
+    return response;
   }
 
   @Get('/event')
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
   async event(@Res() res: Response) {
-    this.producerService.event();
     res.status(HttpStatus.ACCEPTED).send();
+    this.producerService.event();
   }
 }
