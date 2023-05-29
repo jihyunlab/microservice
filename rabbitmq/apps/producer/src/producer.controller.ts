@@ -12,7 +12,7 @@ export class ProducerController {
   @ApiResponse({ status: HttpStatus.OK, description: 'OK' })
   async message(@Res({ passthrough: true }) res: Response) {
     const response = this.producerService.message();
-    res.status(HttpStatus.ACCEPTED);
+    res.status(HttpStatus.OK);
     return response;
   }
 
