@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy, MqttRecordBuilder } from '@nestjs/microservices';
-import { timeout } from 'rxjs';
+import { timeout, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class ClientService {
@@ -8,12 +8,11 @@ export class ClientService {
 
   async message() {
     try {
-      this.client
-        .send('/mqtt/message', new MqttRecordBuilder({}).setQoS(0).build())
-        .pipe(timeout(3000))
-        .subscribe((res) => {
-          console.log(JSON.stringify(res));
-        });
+      const response = firstValueFrom(
+        this.client.send('/mqtt/message', new MqttRecordBuilder({}).setQoS(0).build()).pipe(timeout(3000))
+      );
+
+      return response;
     } catch (error) {
       console.log(error);
     }
