@@ -9,18 +9,17 @@ export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Get('/message')
-  @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'OK' })
   async message(@Res({ passthrough: true }) res: Response) {
     const response = this.clientService.message();
-    res.status(HttpStatus.ACCEPTED);
+    res.status(HttpStatus.OK);
     return response;
   }
 
   @Get('/event')
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
-  async event(@Res({ passthrough: true }) res: Response) {
+  async event(@Res() res: Response) {
+    res.status(HttpStatus.ACCEPTED).send();
     this.clientService.event();
-    res.status(HttpStatus.ACCEPTED);
-    return {};
   }
 }
