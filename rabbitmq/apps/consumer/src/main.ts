@@ -7,7 +7,6 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: ['amqp://jihyunlab:password@127.0.0.1:5672'],
-      noAck: false,
       queue: 'QUEUE',
       queueOptions: {
         durable: false,
