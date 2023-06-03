@@ -1,6 +1,5 @@
-import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Response } from 'express';
 import { ProducerService } from './producer.service';
 
 @ApiTags('RMQ')
@@ -10,16 +9,14 @@ export class ProducerController {
 
   @Get('/message')
   @ApiResponse({ status: HttpStatus.OK, description: 'OK' })
-  async message(@Res({ passthrough: true }) res: Response) {
-    const response = this.producerService.message();
-    res.status(HttpStatus.OK);
-    return response;
+  async message() {
+    return this.producerService.message();
   }
 
   @Get('/event')
+  @HttpCode(HttpStatus.ACCEPTED)
   @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'Accepted' })
-  async event(@Res() res: Response) {
-    res.status(HttpStatus.ACCEPTED).send();
+  async event() {
     this.producerService.event();
   }
 }

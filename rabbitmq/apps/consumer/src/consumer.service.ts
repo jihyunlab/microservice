@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class ConsumerService {
   async message() {
     console.log('message()');
+    return { code: 0, message: 'success' };
   }
 
   async event() {
